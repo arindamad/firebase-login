@@ -13,19 +13,10 @@
 <body>
     <div class="login-box" style="display: none;">
         <div class="lb-header">
-            <a href="javascript: showLogin();" class="active" id="login-box-link">Login</a>
-            <a href="javascript: showSignUp();" id="signup-box-link">Sign Up</a>
+            <a href="javascript:;" class="active" id="login-box-link" onclick="showLogin(this)">Login</a>
+            <a href="javascript:;" id="signup-box-link" onclick="showSignUp(this)">Sign Up</a>
         </div>
-        <div class="social-login">
-            <a href="#">
-                <i class="fa fa-facebook fa-lg"></i>
-                Login in with facebook
-            </a>
-            <a href="javascript: googleLogin();">
-                <i class="fa fa-google-plus fa-lg"></i>
-                log in with Google
-            </a>
-        </div>
+        
         <div class="email-login">
             <div class="u-form-group">
                 <input type="email" placeholder="Email" id="logInEmail"/>
@@ -54,6 +45,17 @@
                 <button onclick="signUp()">Sign Up</button>
             </div>
         </div>
+        <div class="social-login">
+            <a href="#">
+                <i class="fa fa-facebook fa-lg"></i>
+                Login in with facebook
+            </a>
+            <a onclick="googleLogin()">
+                <i class="fa fa-google-plus fa-lg"></i>
+                log in with Google
+            </a>
+        </div>
+
     </div>
 
     <div class="welcomeNote" style="display: none;">

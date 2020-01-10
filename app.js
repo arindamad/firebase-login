@@ -1,26 +1,28 @@
-// $(".email-signup").hide();
-// $("#signup-box-link").click(function(){
-//   $(".email-login").fadeOut(100);
-//   $(".email-signup").delay(100).fadeIn(100);
-//   $("#login-box-link").removeClass("active");
-//   $("#signup-box-link").addClass("active");
-// });
-// $("#login-box-link").click(function(){
-//   $(".email-login").delay(100).fadeIn(100);;
-//   $(".email-signup").fadeOut(100);
-//   $("#login-box-link").addClass("active");
-//   $("#signup-box-link").removeClass("active");
-// });
-var showLogin = (e)=>{
-    document.getElementsByClassName('email-login')[0].style.display="block";
-    document.getElementsByClassName('email-signup')[0].style.display="none";
-    console.log(e);
+var removeClass = (elem,className)=>{
+    elem.forEach(function(i){
+        i.classList.remove(className);
+     });
 }
 
-var showSignUp = ()=>{
+var showLogin = (elem)=>{
+    document.getElementsByClassName('email-login')[0].style.display="block";
+    document.getElementsByClassName('email-signup')[0].style.display="none";
+    var allElem = document.querySelectorAll('.lb-header a');
+    removeClass(allElem,'active');
+    elem.classList.add("active");
+
+}
+
+
+var showSignUp = (elem)=>{
     document.getElementsByClassName('email-login')[0].style.display="none";
     document.getElementsByClassName('email-signup')[0].style.display="block";
+    var allElem = document.querySelectorAll('.lb-header a');
+    removeClass(allElem,'active');
+    elem.classList.add("active");
 }
+
+
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -79,5 +81,27 @@ var logOut = ()=>{
 
 //function for google login 
 var googleLogin = ()=>{
-  
+    alert("abcd");
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    firebase.auth().useDeviceLanguage();
+    
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    
+    console.log(user);
+    // ...
+    }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+    });
 }
